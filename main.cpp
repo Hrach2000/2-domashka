@@ -1,28 +1,39 @@
 #include <iostream>
-#include <map>
 #include <string>
 using namespace std;
-map<string , string> mp;
-map<string,bool> mp1;
-int main(){
-    string s,s1,s2;
-    while(cin>>s){
-        if(s=="INSERT"){
-            cin>>s1>>s2;
-            if(mp1[s1])
-                cout<<"Changed. Old value = "<<mp[s1]<<endl;
-            else
-                cout<<"OK"<<endl;
-            mp1[s1]=true;
-            mp[s1]=s2;
+int a=0,b=0;
+string s;
+int main()
+{
+	cin>>s;
+	for(int i = 0;i<s.size();i++)
+        {
+            if ( (s[i]== '(' & s[i+1]== '}') || (s[i]== '{' & s[i+1]== ')'))
+            {
+                cout<<"false";
+                    return 0;
+            }
         }
-        else{
-            cin>>s1;
-            if(mp1[s1])
-                cout<<mp[s1]<<endl;
-            else
-                cout<<"NO"<<endl;
-        }
-    }
-    return 0;
+	for(int i=0;i<s.size();i++)
+	{
+		if ( s[i] == '(' )
+           a++;
+        else
+           if ( s[i] == ')' )
+               if( --a < 0 )
+                   break;
+		if ( s[i] == '{' )
+           b++;
+        else
+           if ( s[i] == '}' )
+               if( --b < 0 )
+                   break;
+
+		}
+
+		if(a==0 && b==0)
+			cout<<"true"<<endl;
+		else
+			cout<<"false"<<endl;
+		return 0;
 }
